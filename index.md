@@ -1,5 +1,29 @@
 ## Computational
 
+There is no notion before.
+ 
+ -- isomorphism $\rightarrow$ information preserve
+  
+ -- local vs global $\rightarrow$ sparsity 
+  
+ --learning principle $\rightarrow$ variance reduction 
+  
+## The shit we know
+  Every time we figure out a piece of it, it stops being magical; we say, ’Oh, that’s just a computation. --Rodney Brooks
+ 
+## So sad !! There is *No Free lunch*
+  All models are wrong , but some are useful.  --George E. P. Box
+  
+## What is learning ability? Just from curiosity .
+  Reality is merely an illusion, albeit a very persistent one -- Albert Einstein
+  
+## So ?
+  Whenever you  nd yourself on the side of the majority, it is time to pause and reflect. --Mark Twain
+  
+## Yes, you are 
+  because it is there --George Mallory
+  
+  
 You can use the [editor on GitHub](https://github.com/emmettng/emmett.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
