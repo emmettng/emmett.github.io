@@ -1,4 +1,4 @@
-## Computational
+## [Computational](intelligence/intelligence.md)
 
 There is no notion before.
  
