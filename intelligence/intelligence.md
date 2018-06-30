@@ -1,6 +1,4 @@
----
-title: Computational Intelligence
----
+Computational Intelligence
 
 hello
 =====
