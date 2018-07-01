@@ -1,5 +1,5 @@
 ---
-title: Computational Intelligence
+title: Emmett Ng
 ---
 Computational Intelligence
 =====
