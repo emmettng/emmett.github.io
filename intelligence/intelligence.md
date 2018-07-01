@@ -1,3 +1,6 @@
+---
+title: Computational Intelligence
+---
 Computational Intelligence
 =====
 
