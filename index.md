@@ -1,4 +1,4 @@
-## [Computational](intelligence/intelligence.md)
+## [Computational Intelligence](intelligence/intelligence.md)
 
 There is no notion before.
  
@@ -7,6 +7,8 @@ There is no notion before.
  -- local vs global $\rightarrow$ sparsity 
   
  --learning principle $\rightarrow$ variance reduction 
+ 
+## [Machine Learning](ml/ml.md)
   
 ## The shit we know
   Every time we figure out a piece of it, it stops being magical; we say, ’Oh, that’s just a computation. --Rodney Brooks
