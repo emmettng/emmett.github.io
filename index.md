@@ -1,3 +1,7 @@
+---
+title: Emmett Ng
+---
+
 ## [Computational Intelligence](intelligence/intelligence.md)
 
 There is no notion before.
