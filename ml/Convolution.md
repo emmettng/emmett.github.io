@@ -16,15 +16,25 @@ Jeffy Hinton
 and many others
 ## What is it good for?
 
+Intuitive interpretation
+
 composition probolem
+
+what's the point ?
 
 ## affine transformation
 
 ## convolution
 
 ## deconvolution
+we assume the input the a result of down-sample of the output, and now we would like to retrive output (doing up-sampling) ... 
 
-what's the point ?
+persumablelly we will not only being able to increase the dimensionallity but also bring sparsity in the representation .
+## details
+
+- [checkerboard artif]
+
+
 
 
 
