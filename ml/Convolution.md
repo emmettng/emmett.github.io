@@ -27,7 +27,9 @@ what's the point ?
 ## convolution
 
 ## deconvolution
-we assume the input the a result of down-sample of the output, and now we would like to retrive output (doing up-sampling) ... 
+we assume the input the a result of down-sample of the output, and now we would like to retrive output (doing up-sampling) ...
+
+## Intuitively & Computationally 
 
 persumablelly we will not only being able to increase the dimensionallity but also bring sparsity in the representation .
 ## details
