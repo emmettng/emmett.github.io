@@ -5,15 +5,17 @@ Channel ⇒ different viewpoint ?
 One axis, called the channel axis, is used to access different views of the data (e.g., the red, green and blue channels of a color image, or the left and right channels of a stereo audio track).
 
 
-# Convolution in *artificial neural network*
-`... don't speak too soon  for the wheel's still in spin... - Dylan`
+# Convolution
+`convolution in *artificial neural network*`
+**This is an intuitive explination**
+
 
 ## Basic Assumption
 All discussion in this section is based upon the belief of the following assumption:
 
 > **_Complexity is the composition of limited set of simplicities_**.
 
-More specifically, simplicity comes first, then enough composition of different simplicities is the necessary condition for the emerge of complexity *(What is simplicity and Complexity? How could they be measured ? These will be discussed later)*.
+More specifically, simplicity comes first, then composition of sufficient amount of different simplicities is the necessary condition for the emerge of complexity *(What is simplicity and Complexity? How could they be measured ? These will be discussed later)*.
 
 - Lines and curves to figures
 - Letters to literatures
@@ -21,42 +23,64 @@ More specifically, simplicity comes first, then enough composition of different 
 
   > It is possible that different language contains different set of syllables, some syllables in one language is not existed in another language, but each of these languese are all composed with limited set of syllables.
 
-I will use **Elementary Feature** and **Higher Level Feature** instead of **Simplicity** and **Complexity** in the following discussion.
 
-## Convolution ! What is it good for?
+I will use **Elementary Feature** and **Higher Level Feature** instead of **Simplicity** and **Complexity** in the following discussion. Generally speaking, 'Feature Level' is a relative concept.
 
+VGG 16 feature map .
+
+## The binding problem
 Firstly, I will give a intuitive disucssion about a problem of the Fully Connected network (usually being referred as FC network).
-### The binding problem
-Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron $\alpha_1$  is the only representation of a vertical bar in the input layer I and neuron $\alpha_2$ is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuro other than $\alpha_1$ will be activated, so the same as $\alpha_2$ to a horizontal bar.
+
+Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron $\alpha_1$  is the only representation of a vertical bar in the input layer `I` and neuron $\alpha_2$ is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuro other than $\alpha_1$ will be activated, so the same as $\alpha_2$ to a horizontal bar.
 
 ![binding_1](../imgs/binding_1.png)
 
+If our input image contains only one English letter, then it is possible that ,in layer `N+`, there is a neuron $\beta_1$ which is the only representation of a letter `‘T’` and its activation status depends on both $\alpha_1$ and $\alpha_2$.
 
-If our input image contains only one English letter, then it is possible that ,in layer N+, there is a neuron $\beta_1$ which is the only representation of a letter ‘T’, and of course its activation status depends on both $\alpha_1$ and $\alpha_2$.
+Now the question is : In layer `N+`, could there be another neuron $\beta_2$ whose activation status depends on neurons $\alpha_1$ and $\alpha_2$ and it is the only representation of letter `‘L’` in input layer I.
 
-Now the question is : In layer N+, could there be another neuron $\beta_2$ whose activation status depends on neurons $\alpha_1$ and $\alpha_2$ and it is the only representation of letter ‘L’ in input layer I.
+It is apparently that the representation of letter ‘L’ cannot depends on  $\alpha_1$ and $\alpha_2$ , otherwise it will bring ambiguity.
 
-It is apparently that if a higher level feature depends on a set of lower level features, then without other information, the same set of lower level features can only contribute to the representations of the same higher level features. In this example, the representation of letter ‘L’ cannot depends on  $\alpha_1$ and $\alpha_2$ , otherwise it will bring ambiguity.
-
-A simple solution is to have one more neuron with represent either vertical bar or horizontal bar.  Such as in figure below. Now we have two neurons $\alpha_2$ and $\alpha_3$ that represent horizontal bar in different context.
+The simplest solution is to have one more neuron that represent either vertical bar or horizontal bar.  Such as in figure below. In this case, neuron $\alpha_2$ and $\alpha_3$ both represent horizontal bar, furthermore they also carry composition information that indicate the role of horizontal bar in different context (`'L'` or `'T'`) repectively.
 
 ![binding_2](../imgs/binding_2.png)
 
-Now we know, due to the lack of composition information, no context information,  the reuse rate of lower level feature is really poor.
+> Thanks for Dr Simon Stringer's [talk](https://www.youtube.com/watch?v=W0q_XV8NgzQ)
 
-In the example above, we assume that T and L will be presented separately and there is features will be represented by only one neuron,  what if T and L could be presented same time maybe multiply times in the input layer, and $\alpha_1$ is actually a set of neuron,
+Of course, it it a common sense that different objects (higher level feature) have different parts, but as the feature level goes higher and higher, more and more basic elementary features will take part in the composition of more and more higher level features. For instance, as shown in figure below, the composition information seems to be not necessary. Because the Optimus Prime has a [Barrage cannon](https://tfwiki.net/wiki/Barrage_cannon) while a truck does not. In addition, a truck carries a cargo, while the Optimus Prime does not. However, it is highly likely that the barrage cannon and the trailer share a lot elementray features. Thus, introducing composition information will be inevitable.
+
+![binding_3](../imgs/binding_3.jpg)
+
+Now we know, in a fully connected neuron network, duplicated representations of same elementary features are necessary for expressing composition information (context information). But how much trouble it would bring into the network?
+
+![combinatorial explosing](../imgs/binding_4.png)
+Intuitively, the matrix above shows relation between higher level features in a certain layer and elementary features one layer below.
+$O_1$ to $O_i$ are different features, $i$ is the index. If two features share exactly same set of elementary features, then there will be at least one replicated representation of an elementary features to provide extra composition information.
+
+For example, $O_1$ and $O_2$ are presented by same set of elementary features, then there will be one extra elementary feature that carrying composition information. $O_1$ and $O_3$ might depends on not exactly the same set of elementary features, then it is not necessary to have an extra replicated feature.
+
+![combinatorial explosing 2](../imgs/binding_5.png)
+Assume, there is a new feature $O_{i+1}$ that need to be represented by neurons in this layer `M` and features $O_{i+1}$, $O_i$, $O_2$ are all composed with same set of features, therefore the minimun number of replicated features in previous layer after introducing $O_{i+1}$ is as shown in figure above.
+
+The matrix above describe the what if
+
+the need for extra features will be augmented as the layer going down, so the possiblity of sharing same set of elementary features. Therefore,
+
+- Top to buttom, The necessary features will increase dramatically
+- Buttom to Top, the search time of certain higher level feature will be increase as will.
+
+All these will lead to combinatorial explosion on both space and time.
+
+During the training process, it would be extremmly hard to train such a network. All different kinds of feature map, but none of them is trained based on `'Fully Connected'` network.
 
 
-Two object does not share same set of features will be find,
-Furthermore,  as the higher level feature being more and more complicated, almost all elementary features will be contribute the higher.  And as the network growing deeper and deeper.
 
 
-The necessary would increase dramatically and lead to Combinatorial explosion.
+It seems like only if the network could manage to learn one extra representation for each new concept, then everything will be fine.
 
 
 this is an Intuitive explanation of binding problem ,
 the coding refers to this [blog](../Intelligence/intelligence.md)
-
 
 we need to replicated elementary feature so that different higher level composition could be possible representated.
 
@@ -64,14 +88,18 @@ combinatorial explosion
 
 what's the point ?
 
+## Convolution ! What is it good for?
+Convolution is one solution which would so the problem above.
+
 ## convolution
-Each channel is a detector of a lower level feature.  And the composition information is preserved as it is in the original input. 
+Each channel is a detector of a lower level feature.  And the composition information is preserved as it is in the original input.
 
 ## arithematic
 
+[doc](https://arxiv.org/pdf/1603.07285.pdf)
+
 ## deconvolution
 we assume the input the a result of down-sample of the output, and now we would like to retrive output (doing up-sampling) ...
-
 
 ## Intuitively & Computationally
 
@@ -93,3 +121,5 @@ Channel ⇒ different viewpoint ?
 One axis, called the channel axis, is used to access different views of the data (e.g., the red, green and blue channels of a color image, or the left and right channels of a stereo audio track).
 
 [^fn1]:http://www.quotedb.com/quotes/2112
+
+polychronization it is not the only solution.

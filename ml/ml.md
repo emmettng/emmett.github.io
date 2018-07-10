@@ -1,7 +1,13 @@
 # Machine Learning
 
+## We can predict ... YOU WISH!
+
 Machine is not learning .
-We learn the parameter of a hypothesis, when the hypothesis is complicated, we use machine to get these parameters.
+We **COMPUTE** the parameter of a hypothesis about our **OBSERVATION** , when the hypothesis is complicated, we use machine to do this.
+
+
+
+
 
 ## Convolution
 
