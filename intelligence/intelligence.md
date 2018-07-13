@@ -9,7 +9,7 @@ Machine Learning & Computational Intelligence
 
 **You are here!**
 
-- information preservation
+- information preservatio n
 - sparsity
 - variance reduction
 - category + individual ?

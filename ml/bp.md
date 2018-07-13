@@ -205,7 +205,8 @@ explain from 1 to 8, if I cannot remember what this mean smoothly maybe two week
 > $\delta^{N-1} = \delta^N \cdot W^T_N \cdot f^\prime_{N-1} \tag{9}$
 > - The change factor of layer `N-1` ($\delta^{N-1}$)is all about the loss of previous layer `N` ($\delta^N$)propagated along the weight `W` of that layer ($W^T_N$) and also multiple by the loss of this layer`f` ($f^\prime_{N-1}$)
 > - such a natural thing
-> - $\delta^N$ with size of out of $W_N$, $f^\prime_N-1$ with size of input of $W_N$. $W$ would either 
+> - $\delta^N$ with size of out of $W_N$, $f^\prime_N-1$ with size of input of $W_N$.
+> - The role of $W$ is affine transformation which would either shrink or amplify the information , such as in  [conv & trans-conv](./Convolution.md)
 > - I just need the above part. Why rewirte the BP all over again?....
 
 **The above equation `(9)` is valid for all hidden layers**
