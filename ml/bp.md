@@ -1,3 +1,14 @@
+--------------
+
+This doc is from rewriting of all my notes in google docs for reminding myself for future reference, so it will be updated when necessary.
+
+By the time I need this doc, it is highly likely that the only thing I could remember is that I use to know what being recorded here very well. Therefore:
+
+notation will be as simple as possible.
+
+equation will be as easy understanding as possible.
+
+--------------
 # BP algorithm
 BP could be the ab
 Back propagation is being know as pass the gradient of a network
@@ -125,6 +136,7 @@ A little bit complicated:
 
 #### 3. Multi-layer
 **With more layers comes more notation.**
+> One more, Just One more notation `N` label of layer `N`.
 
 First of all, rewirte notations in previous examples, so the meaning of newly introduced symbol `'N'` could be clearified:
 
@@ -156,13 +168,65 @@ Use `I` to represent input of a certain layer.
 
 >4.
 >- $\frac{dl}{dW_N} =l^\prime \bigodot f^\prime_N \bigotimes a^\prime_N$
->- $l^\prime \bigodot f^\prime_N=\delta^n$
+>- $l^\prime \bigodot f^\prime_N=\delta^n$ **(The `l` is just about final alyer)**
 
 - $a^\prime_N$ is basically input of layer `N` replicated to shape of weight of layer `N` $\rightarrow$ $I^T_N|W_N$.
 - change of weight on layer `N` ($\hat{W}_N$) will be writen as the form of `loss of layer N`(layer output size vector) $\bigotimes$ `the base of change on layer N` : $\hat{W}_N = \delta^N \bigotimes I^T_N|W_N$
 
-**The above equation hold for every layer!!!**
+**The above equation hold for every layer!!!**  
+yes this one below:  
+$\hat{W}_N = \delta^N \bigotimes I^T_N|W_N$   
+Just when `N` is the final layer we have:  
+ $l^\prime \bigodot f^\prime_N=\delta^n \tag{0}$
 
+##### Now More Layers
+
+$$
+\begin{align*}
+\frac{dl}{dW_{N-1}} &= \frac{dl}{da_{N-1}}\frac{da_{N-1}}{dW_{N-1}} \tag{1}\\
+&= \frac{dl}{da_{N-1}} \bigotimes I^T_{N-1}|W_{N-1} \tag{2}\\
+&= \frac{dl}{da_N}\frac{da_N}{da_{N-1}} \bigotimes I^T_{N-1}|W_{N-1} \tag{3}\\
+&= \frac{dl}{da_N}\frac{da_N}{dI_N}\frac{df_{N-1}}{da_{N-1}}\bigotimes I^T_{N-1}|W_{N-1} \tag{4}\\
+&= (\delta^N \cdot W^T_N \cdot f^\prime_{N-1}) \bigotimes I^T_{N-1}|W_{N-1} \tag{5} \\
+\hat{W}_{N-1} = \frac{dl}{dW_{N-1}} &= (\delta^N \cdot W^T_N \cdot f^\prime_{N-1}) \bigotimes I^T_{N-1}|W_{N-1} \tag{6}\\
+\hat{W}_{N-1} = \frac{dl}{dW_{N-1}} &= \delta^{N-1} \bigotimes I^T_{N-1}|W_{N-1} \tag{7} \\
+\hat{W}_{N-1} &= \delta^{N-1} \bigotimes I^T_{N-1}|W_{N-1} \tag{8}
+\end{align*}
+$$
+OK that's all!
+
+**THE END**
+
+*Figure out how to add multiple blank lines in markdown, so reader or future me need to scroll down a lot to see the following part.*
+
+explain from 1 to 8, if I cannot remember what this mean smoothly maybe two weeks later.
+
+- What you start seeing in line `(5)` is what being propagated !
+> $\delta^{N-1} = \delta^N \cdot W^T_N \cdot f^\prime_{N-1} \tag{9}$
+> - The change factor of layer `N-1` ($\delta^{N-1}$)is all about the loss of previous layer `N` ($\delta^N$)propagated along the weight `W` of that layer ($W^T_N$) and also multiple by the loss of this layer`f` ($f^\prime_{N-1}$)
+> - such a natural thing
+> - $\delta^N$ with size of out of $W_N$, $f^\prime_N-1$ with size of input of $W_N$. $W$ would either 
+> - I just need the above part. Why rewirte the BP all over again?....
+
+**The above equation `(9)` is valid for all hidden layers**
+
+**In summary:**
+- $\delta^N = l^\prime \bigodot f^\prime_N$ : line `(0)` initial change to start the propagation. The change factor of **final layer**.    
+- $\delta^N \rightarrow \delta^{N-1}$    : line `(9)` back propagate
+- $\delta^N \rightarrow I^T_N|W_N \rightarrow \hat{W_N}$  :line `(8)` compute change of $W_N$
+
+These three maping are what **back propagation** all about.
+
+In human language it means:    
+How to modify / change / update `WEIGHT` on each `LAYER` depends on:
+- Input to this layer: $I \rightarrow I^T_N|W_N$
+- Observation on difference between behaviour of this layer on a given input and expectation of the behaviour: $\delta^N$.
+
+REMEMBER this useless expression.
+
+#### convergence
+- one layer : easy
+- multi layer : change $W$ seperately which lead to different hidden layer input thatn previous loop, batch might summarize the trend but, for a mnist exmaple in yya, actually it also works on nonshuffled dataset. Someone says there is no solid proof yet.
 --------------------------------------------------------------------
 
 
