@@ -8,6 +8,8 @@ We **COMPUTE** the parameter of a hypothesis about our **OBSERVATION** , when th
 
 ## Convolution
 
+## BP algorithm
+
 ## Sparsity
 
 ## VC dimension

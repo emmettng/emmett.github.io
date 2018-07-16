@@ -1,5 +1,5 @@
 --------------
-0. If you find some error in following content I will be really appreciate if you could start an issue or notfiy me by what every means.    
+0. If you find some error in following content I will be really appreciate if you could start an issue or notify me by what every means.    
 1. This doc is from rewriting of all my notes in google docs for reminding myself for future reference, so it will be updated when necessary.    
 2. By the time I need this doc, it is highly likely that the only thing I could remember is that I use to know what being recorded here very well. Therefore:  
     - Notation will be as simple as possible.
@@ -12,9 +12,9 @@
 # Convolution
 `convolution in *artificial neural network*`
 
-**This is an intuitive explination**   
-**This is an intuitive explination**   
-**This is an intuitive explination**   
+**This is an intuitive explanation**   
+**This is an intuitive explanation**   
+**This is an intuitive explanation**   
 
 ## Basic Assumption
 All discussion in this section is based upon the belief of the following assumption:
@@ -35,7 +35,7 @@ I will use **Elementary Feature** and **Higher Level Feature** instead of **Simp
 ## The binding problem
 Firstly, I will give a intuitive discussion about a problem of the Fully Connected network (usually being referred as FC network).
 
-Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron $\alpha_1$  is the only representation of a vertical bar in the input layer `I` and neuron $\alpha_2$ is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuro other than $\alpha_1$ will be activated, so the same as $\alpha_2$ to a horizontal bar.
+Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron $\alpha_1$  is the only representation of a vertical bar in the input layer `I` and neuron $\alpha_2$ is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuron other than $\alpha_1$ will be activated, so the same as $\alpha_2$ to a horizontal bar.
 
 ![binding_1](../imgs/binding_1.png)
 
@@ -81,19 +81,19 @@ The consequence is: It would be extremely hard to train. This is part of the rea
 This section is just an **Intuitive Explanation** of the binding problem in `Fully Connected` **Deep Neural Network**. In real world the case would be much more complicated:
 
 - Features could be represented by a set of neurons.
-- Contrains will limited the amount of distinguishable feature representations, such as regularization.
+- Constrains will limited the amount of distinguishable feature representations, such as regularisation.
 
 ## Convolution ! What is it good for?
 Convolution is one solution which would so the problem above.
 
 The basic assumption of using CNN is:
-> There are intrinsic strucutre in input data.
+> There are intrinsic structure in input data.
 
-It is equavlient to the assumption at the begining of this doc.
+It is equivalent to the assumption at the beginning of this doc.
 > **_Complexity is the composition of limited set of simplicities_**.
 
 ## convolution
-kernel is fitler with smaller dimension compare with input channel. Conceptually, intuitively, each each kernel could take input from multiple channles and its output is a unique channel, thus:
+kernel is filter with smaller dimension compare with input channel. Conceptually, intuitively, each each kernel could take input from multiple channels and its output is a unique channel, thus:
 - Each output channel is a detector of lower level feature(s). The output channel of preserves the composition information in the original input(from one or multiple channels).
 - Different channels are different viewpoints
 
@@ -114,7 +114,7 @@ So, the total number of parameters in one convolutionary layer is
 
 So `kernel` $k+1$ could response for detecting `horizontal bar` only. Therefore, `kernel` $K$ in this case is of the size `(1,2,x,y)`, 1 input channel and 2 output channels. And layer `N+` is capable of representing letter `T` and `L` at the same time.
 
-Intuitively, the entrie conv and pooling operation can be very well explained by example above.
+Intuitively, the entire conv and pooling operation can be very well explained by example above.
 
 ## Transpose convolution (deconvolution)
 The following picture comes from two great tutorials about convolution and transpose convolution:
@@ -131,30 +131,30 @@ The following picture comes from two great tutorials about convolution and trans
   - transpose convolution
 ![conv_2.2](../imgs/conv_2.2.png)
 
-In the above two examples, input is reshaped as an vector and the `moving filter operation` of a `kernel` is equalivent to an matrix as being shown above. So the ouput is the output of one channel.
+In the above two examples, input is reshaped as an vector and the `moving filter operation` of a `kernel` is equivalent to an matrix as being shown above. So the output is the output of one channel.
 
 It is obviously what `convolution` and `transpose convolution` mean ~!
 
 But, what is `convolution` and `transpose convolution ` mean ?
 
 officially:
-> we assume the input the a result of down-sample of the output, and now we would like to retrive output (doing up-sampling) ...
+> we assume the input the a result of down-sample of the output, and now we would like to retrieve output (doing up-sampling) ...
 
 Actually:
 
 - for transpose convolution:    
-    - As long as the kernel is not all zero. it must be a injective mapping (monomorphism), and mornomorphism guarantee the information got preserved and not need to know global information.
-    - Though, there might be nonlinear activation function after the affline transformation, as long as the output dimensionallity is high enough, monomorphism can be guranteed.
+    - As long as the kernel is not all zero. it must be a injective mapping (monomorphism), and monomorphism guarantee the information got preserved and not need to know global information.
+    - Though, there might be nonlinear activation function after the affine transformation, as long as the output dimensionality is high enough, monomorphism can be guaranteed.
 
 - for convolution:     
-  Even though , it detect possible elemenary strucutre, it would be better if it being used together with `max pooling`. The reason is :
+  Even though , it detect possible elementary structure, it would be better if it being used together with `max pooling`. The reason is :
 
-  - the non-zeros velue of each row vectors (above) are the same by order.
+  - the non-zeros value of each row vectors (above) are the same by order.
   - Therefore, there is a unique maximum value in only one dimension which correspond to input vectors of certain direction.
   ![conv_4](../imgs/conv_4.png)
-  - Therefore, convolution layer equavlient to sujective mapping (epimorphism), which implies the knowledge of global information.
+  - Therefore, convolution layer equivalent to subjective mapping (epimorphism), which implies the knowledge of global information.
 
-## arithematic
+## arithmetic
 The computation along x axis and y axis are independent, so they can be described in the same way as:
 
 tired....
