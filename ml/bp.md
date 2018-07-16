@@ -229,7 +229,7 @@ REMEMBER this useless expression.
 
 #### convergence
 - one layer : easy
-- multi layer : change $W$ separately which lead to different hidden layer input that previous loop, batch might summarise the trend but, for a mnist example in yya, actually it also works on non-shuffled dataset. Someone says there is no solid proof yet.
+- multi layer : change $W$ separately which lead to different hidden layer input that previous loop, batch might the trend but, for a mnist example in yya, actually it also works on non-shuffled dataset. Someone says there is no solid proof yet.
 --------------------------------------------------------------------
 
 
