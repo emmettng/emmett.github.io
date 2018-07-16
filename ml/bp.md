@@ -8,6 +8,8 @@ notation will be as simple as possible.
 
 equation will be as easy understanding as possible.
 
+All recorded below is my personal understanding and has not been reviewed by many other expert seriously.
+
 --------------
 # BP algorithm
 BP could be the ab
