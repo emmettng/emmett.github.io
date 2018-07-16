@@ -6,9 +6,6 @@ Machine is not learning .
 We **COMPUTE** the parameter of a hypothesis about our **OBSERVATION** , when the hypothesis is complicated, we use machine to do this.
 
 
-
-
-
 ## Convolution
 
 ## Sparsity
