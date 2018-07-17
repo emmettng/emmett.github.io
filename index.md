@@ -1,4 +1,3 @@
-
 ---
 title: Emmett Ng
 mathjax: true
