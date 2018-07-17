@@ -46,7 +46,7 @@ Belief propagation is ... ok something else.
 
       $x^T|W$ is my notation for remembering the result of this derivatives.
       it means transpose $x$ and replicate the value of each dimension so $X^T|W$ will be a matrix that has the same shape as W.
-      ![trans_extend](../imgs/trans_extend.png)
+      ![trans_extend](../imgs/trans_extend.png) 
       The image above show $x^T|W$ in a normal case, if $W$ is simlified as a vector, then $x^T|W$ will just be $X^T$.
 
       The Transpose operation is necessary so .....
