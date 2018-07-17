@@ -16,6 +16,6 @@ mathjax: true
 
 ## [Machine Learning](ml/ml.md)
 
-  - [Back Propagation]
+  - [Back Propagation](ml/bp.md.html)
 
-  - [Convolution]
+  - [Convolution](ml/Convolution.md.html)
