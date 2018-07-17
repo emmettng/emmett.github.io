@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Emmett Ng
 mathjax: true
 ---
