@@ -529,7 +529,7 @@ The same as above</p>
 <li>
 <p>treat <strong>Vector</strong> (both <code style="font-family: &quot;courier new&quot;;">Column</code> and <code style="font-family: &quot;courier new&quot;;">Row</code> vector) as variable, then:<br>
 <a href="http://cs231n.stanford.edu/vecDerivs.pdf"><span class="math"><script type="math/tex">\frac{d y}{dx} = W</script></span></a>.
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/vecDerivs.png?v=1531811153047" alt="vecDerivs"><br>
+<img src=../imgs/vecDerivs.png?v=1531811153047" alt="vecDerivs"><br>
 <a href="http://cs231n.stanford.edu/vecDerivs.pdf">(image above from: here)</a>.</p>
 </li>
 <li>
@@ -543,7 +543,7 @@ The same as above</p>
 <p>Details is also in <a href="http://cs231n.stanford.edu/vecDerivs.pdf">here</a>.</p>
 <p><span class="math"><script type="math/tex">x^T|W</script></span> is my notation for remembering the result of this derivatives.
 it means transpose <span class="math"><script type="math/tex">x</script></span> and replicate the value of each dimension so <span class="math"><script type="math/tex">X^T|W</script></span> will be a matrix that has the same shape as W.
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/trans_extend.png?v=1531811153048" alt="trans_extend">
+<img src="../imgs/trans_extend.png?v=1531811153048" alt="trans_extend">
 The image above show <span class="math"><script type="math/tex">x^T|W</script></span> in a normal case, if <span class="math"><script type="math/tex">W</script></span> is simlified as a vector, then <span class="math"><script type="math/tex">x^T|W</script></span> will just be <span class="math"><script type="math/tex">X^T</script></span>.</p>
 <p>The Transpose operation is necessary so …</p>
 </li>
@@ -565,7 +565,7 @@ f could be any differentiable function, and it is an elementwise operation on <c
 <li><span class="math"><script type="math/tex">l=l(f,t)</script></span>, then <span class="math"><script type="math/tex">l^\prime=\frac{dl}{df}</script></span><br>
 <span class="math"><script type="math/tex">l</script></span> is the loss function, a metric which give an scale value to represent difference between <span class="math"><script type="math/tex">l</script></span> and <span class="math"><script type="math/tex">t</script></span>, <span class="math"><script type="math/tex">t</script></span> is the target value, in supervised learning <span class="math"><script type="math/tex">t</script></span> will be labels, either categorical label or real value for regression problem. In unsupervised learning, <span class="math"><script type="math/tex">t</script></span> could be <span class="math"><script type="math/tex">x</script></span> or some other value.</li>
 </ul>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/bp_1.png?v=1531811153048" alt="bp_1"></p>
+<p><img src="../imgs/bp_1.png?v=1531811153048" alt="bp_1"></p>
 <p>basically a single layer one dimensional output fully connected neuron network would be like the simplified W in the image above, in this case <span class="math"><script type="math/tex">y = f(a) = f(a(x|W))</script></span></p>
 </li>
 <li>
@@ -595,7 +595,7 @@ f could be any differentiable function, and it is an elementwise operation on <c
 <blockquote>
 <p>we treat input to each layer as a row vector, therefore <span class="math"><script type="math/tex">a=x \cdot W</script></span></p>
 </blockquote>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/bp_1.png?v=1531811153048" alt="bp_1"></p>
+<p><img src="../imgs/bp_1.png?v=1531811153048" alt="bp_1"></p>
 <ul>
 <li><span class="math"><script type="math/tex">x^T|W</script></span> is just <span class="math"><script type="math/tex">X^T</script></span></li>
 <li><span class="math"><script type="math/tex">\frac{dl}{df}</script></span> is a scale value or say 1d vector.</li>
@@ -603,7 +603,7 @@ f could be any differentiable function, and it is an elementwise operation on <c
 </ul>
 <p>So, for a simplified network with a single layer and 1d output,
 if the input is <span class="math"><script type="math/tex">x_1</script></span> and t is <span class="math"><script type="math/tex">y_1</script></span>, we know:</p>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/bp_2.png?v=1531811153048" alt="bp_2"></p>
+<p><img src="../imgs/bp_2.png?v=1531811153048" alt="bp_2"></p>
 <ul>
 <li>
 <p><span class="math"><script type="math/tex">a_1 = X_1 \cdot W_0</script></span></p>
@@ -641,7 +641,7 @@ if the input is <span class="math"><script type="math/tex">x_1</script></span> a
 </ul>
 <h4>2. single layer, multi output.</h4>
 <p>A little bit complicated:
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/bp_3.png?v=1531811153048" alt="bp_3"></p>
+<img src="../imgs/bp_3.png?v=1531811153048" alt="bp_3"></p>
 <ul>
 <li><span class="math"><script type="math/tex">X^T|W</script></span> would be a replicate of <span class="math"><script type="math/tex">x</script></span> like in image above and have shape as W.</li>
 <li><span class="math"><script type="math/tex">l^\prime</script></span> is a vector whose components are partial derivatives.</li>
@@ -676,7 +676,7 @@ if the input is <span class="math"><script type="math/tex">x_1</script></span> a
 <li>compare with single output equation, we know that notation <span class="math"><script type="math/tex">\bigotimes</script></span> represent multiply elements in <span class="math"><script type="math/tex">\delta</script></span> (output shape of <span class="math"><script type="math/tex">W</script></span>) with corresponding columns or rows in <span class="math"><script type="math/tex">x^T|W</script></span>, as in following images:</li>
 </ul>
 </blockquote>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/bp_4.png?v=1531811153048" alt="bp_4"></p>
+<p><img src="../imgs/bp_4.png?v=1531811153048" alt="bp_4"></p>
 <h4>3. Multi-layer</h4>
 <p><strong>With more layers comes more notation.</strong></p>
 <blockquote>
