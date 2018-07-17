@@ -537,7 +537,7 @@ pre.editor-colors .bracket-matcher .region {
 <h2>The binding problem</h2>
 <p>Firstly, I will give a intuitive discussion about a problem of the Fully Connected network (usually being referred as FC network).</p>
 <p>Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron <span class="math"><script type="math/tex">\alpha_1</script></span>  is the only representation of a vertical bar in the input layer <code style="font-family: &quot;courier new&quot;;">I</code> and neuron <span class="math"><script type="math/tex">\alpha_2</script></span> is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuron other than <span class="math"><script type="math/tex">\alpha_1</script></span> will be activated, so the same as <span class="math"><script type="math/tex">\alpha_2</script></span> to a horizontal bar.</p>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_1.png?v=1531811164772" alt="binding_1"></p>
+<p><img src="../imgs/binding_1.png?v=1531811164772" alt="binding_1"></p>
 <blockquote>
 <p>Thanks for Dr Simon Stringer’s <a href="https://www.youtube.com/watch?v=j4kjGso_Ze0&amp;t=183s">talk</a> and the example of letters <code style="font-family: &quot;courier new&quot;;">'T'</code> and <code style="font-family: &quot;courier new&quot;;">'L'</code>.</p>
 </blockquote>
@@ -545,15 +545,15 @@ pre.editor-colors .bracket-matcher .region {
 <p>Now the question is : In layer <code style="font-family: &quot;courier new&quot;;">N+</code>, could there be another neuron <span class="math"><script type="math/tex">\beta_2</script></span> whose activation status depends on neurons <span class="math"><script type="math/tex">\alpha_1</script></span> and <span class="math"><script type="math/tex">\alpha_2</script></span> and it is the only representation of letter <code style="font-family: &quot;courier new&quot;;">‘L’</code> in input layer I.</p>
 <p>It is apparently that the representation of letter ‘L’ cannot depends on the combination of <span class="math"><script type="math/tex">\alpha_1</script></span> and <span class="math"><script type="math/tex">\alpha_2</script></span> , otherwise it will bring ambiguity.</p>
 <p>The simplest solution is to have one more neuron that represent either vertical bar or horizontal bar.  Such as in figure below. In this case, neuron <span class="math"><script type="math/tex">\alpha_2</script></span> and <span class="math"><script type="math/tex">\alpha_3</script></span> both represent horizontal bar, furthermore they also carry composition information that indicate the role of horizontal bar in different context (<code style="font-family: &quot;courier new&quot;;">'L'</code> or <code style="font-family: &quot;courier new&quot;;">'T'</code>) respectively.</p>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_2.png?v=1531811164772" alt="binding_2"></p>
+<p><img src="../imgs/binding_2.png?v=1531811164772" alt="binding_2"></p>
 <p>Of course, it it a common sense that different objects (higher level feature) have different parts, but as the feature level goes higher and higher, more and more basic elementary features will take part in the composition of more and more higher level features. For instance, as shown in figure below, the composition information seems to be not necessary. Because the Optimus Prime has a <a href="https://tfwiki.net/wiki/Barrage_cannon">Barrage cannon</a> while a truck does not. In addition, a truck carries a cargo, while the Optimus Prime does not. However, it is highly likely that the barrage cannon and the trailer share a lot elementary features. Thus, introducing composition information will be inevitable in a deep architecture.</p>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_3.jpg?v=1531811164772" alt="binding_3"></p>
+<p><img src="../imgs/binding_3.jpg?v=1531811164772" alt="binding_3"></p>
 <p>Now we know, in a fully connected neuron network, duplicated representations of same elementary features are necessary for expressing composition information (context information). But how much trouble it would bring into the network?</p>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_combinatorial_1.png?v=1531811164772" alt="combinatorial explosion">
+<p><img src="../imgs/binding_combinatorial_1.png?v=1531811164772" alt="combinatorial explosion">
 Intuitively, the matrix above shows relation between higher level features in a certain layer and elementary features one layer below.
 <span class="math"><script type="math/tex">O_1</script></span> to <span class="math"><script type="math/tex">O_i</script></span> are different features, <span class="math"><script type="math/tex">i</script></span> is the index. If two features share exactly same set of elementary features, then there will be at least one replicated representation of an elementary features to provide extra composition information.</p>
 <p>For example, <span class="math"><script type="math/tex">O_1</script></span> and <span class="math"><script type="math/tex">O_2</script></span> are presented by same set of elementary features, then there will be one extra elementary feature that carrying composition information. <span class="math"><script type="math/tex">O_1</script></span> and <span class="math"><script type="math/tex">O_3</script></span> might depends on not exactly the same set of elementary features, then it is not necessary to have an extra replicated feature.</p>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_combinatorial_2.png?v=1531811164772" alt="combinatorial explosion 2">
+<p><img src="../imgs/binding_combinatorial_2.png?v=1531811164772" alt="combinatorial explosion 2">
 Assume, there is a new feature <span class="math"><script type="math/tex">O_{i+1}</script></span> that need to be represented by neurons in this layer <code style="font-family: &quot;courier new&quot;;">M</code> and features <span class="math"><script type="math/tex">O_{i+1}</script></span>, <span class="math"><script type="math/tex">O_i</script></span>, <span class="math"><script type="math/tex">O_2</script></span> are all composed with same set of features, therefore the minimum number of replicated features in previous layer after introducing <span class="math"><script type="math/tex">O_{i+1}</script></span> is as shown in figure above.</p>
 <p>This is just the relation between two adjacent layers, the need for extra features will be augmented as the layer goes down. For example, feature <span class="math"><script type="math/tex">O_{i+1}</script></span> is in layer <code style="font-family: &quot;courier new&quot;;">M</code>, the matrix indicates that we need at least two replicated representation in layer <code style="font-family: &quot;courier new&quot;;">M-1</code>, and each of these <code style="font-family: &quot;courier new&quot;;">M-1</code> features might need a certain number of replicated represent of their own in layer <code style="font-family: &quot;courier new&quot;;">M-2</code>.</p>
 <p>So, for a artificial neuron network with deep architecture:</p>
@@ -596,7 +596,7 @@ Assume, there is a new feature <span class="math"><script type="math/tex">O_{i+1
 <blockquote>
 <p><span class="math"><script type="math/tex">o * i * x * y</script></span></p>
 </blockquote>
-<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_1.png?v=1531811164772" alt="conv_1"></p>
+<p><img src="../imgs/conv_1.png?v=1531811164772" alt="conv_1"></p>
 <p><code style="font-family: &quot;courier new&quot;;">kernel</code> <span class="math"><script type="math/tex">k</script></span> response for detecting <code style="font-family: &quot;courier new&quot;;">vertical bar</code> only. Therefore, the output of kernel <span class="math"><script type="math/tex">k</script></span> actually contains not only the representation of vertical bar but also the position information of vertical bar.</p>
 <p>So <code style="font-family: &quot;courier new&quot;;">kernel</code> <span class="math"><script type="math/tex">k+1</script></span> could response for detecting <code style="font-family: &quot;courier new&quot;;">horizontal bar</code> only. Therefore, <code style="font-family: &quot;courier new&quot;;">kernel</code> <span class="math"><script type="math/tex">K</script></span> in this case is of the size <code style="font-family: &quot;courier new&quot;;">(1,2,x,y)</code>, 1 input channel and 2 output channels. And layer <code style="font-family: &quot;courier new&quot;;">N+</code> is capable of representing letter <code style="font-family: &quot;courier new&quot;;">T</code> and <code style="font-family: &quot;courier new&quot;;">L</code> at the same time.</p>
 <p>Intuitively, the entire conv and pooling operation can be very well explained by example above.</p>
@@ -607,18 +607,18 @@ Assume, there is a new feature <span class="math"><script type="math/tex">O_{i+1
 <p><a href="https://arxiv.org/pdf/1609.07009.pdf">Is the deconvolution layer the same as convolution layer</a></p>
 <ul>
 <li>convolution
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_3.1.png?v=1531811164772" alt="conv_3.1"></li>
+<img src="../imgs/conv_3.1.png?v=1531811164772" alt="conv_3.1"></li>
 <li>transpose convolution
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_3.2.png?v=1531811164772" alt="conv_3.2"></li>
+<img src="../imgs/conv_3.2.png?v=1531811164772" alt="conv_3.2"></li>
 </ul>
 </li>
 <li>
 <p><a href="https://towardsdatascience.com/up-sampling-with-transposed-convolution-9ae4f2df52d0">up-sampling with transpose convolution</a></p>
 <ul>
 <li>convolution
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_2.1.png?v=1531811164772" alt="conv_2.1"></li>
+<img src="../imgs/conv_2.1.png?v=1531811164772" alt="conv_2.1"></li>
 <li>transpose convolution
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_2.2.png?v=1531811164773" alt="conv_2.2"></li>
+<img src="../imgs/conv_2.2.png?v=1531811164773" alt="conv_2.2"></li>
 </ul>
 </li>
 </ul>
@@ -644,7 +644,7 @@ Even though , it detect possible elementary structure, it would be better if it 
 <ul>
 <li>the non-zeros value of each row vectors (above) are the same by order.</li>
 <li>Therefore, there is a unique maximum value in only one dimension which correspond to input vectors of certain direction.
-<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_4.png?v=1531811164773" alt="conv_4"></li>
+<img src="../imgs/conv_4.png?v=1531811164773" alt="conv_4"></li>
 <li>Therefore, convolution layer equivalent to subjective mapping (epimorphism), which implies the knowledge of global information.</li>
 </ul>
 </li>
