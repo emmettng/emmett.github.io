@@ -1,3 +1,6 @@
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+</script>
+
 ---
 title: Emmett Ng
 mathjax: true
@@ -18,4 +21,4 @@ mathjax: true
 
   - [Back Propagation](ml/bp.md.html)
 
-  - [Convolution](ml/Convolution.md.html)
+  - [Convolution]

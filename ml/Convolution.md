@@ -1,3 +1,5 @@
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+</script>
 --------------
 0. If you find some error in following content I will be really appreciate if you could start an issue or notify me by what every means.    
 1. This doc is from rewriting of all my notes in google docs for reminding myself for future reference, so it will be updated when necessary.    
