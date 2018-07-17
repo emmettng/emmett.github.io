@@ -14,6 +14,6 @@ title: Emmett Ng
 
 ## [Machine Learning](ml/ml.md)
 
-  - [Back Propagation](ml/bp.md)
+  - [Back Propagation]
 
-  - [Convolution](ml/Convolution.md)
+  - [Convolution]
