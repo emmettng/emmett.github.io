@@ -6,7 +6,7 @@ mathjax: true
 
 ## [Computational Intelligence](intelligence/intelligence.md)
 
- - monomorphism $\rightarrow$ information preserve, and it obeys the following constrain:
+ - monomorphism $$\rightarrow$$ information preserve, and it obeys the following constrain:
 
  - local vs global $\rightarrow$ sparsity
 
