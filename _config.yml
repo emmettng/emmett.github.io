@@ -3,5 +3,5 @@ log : [Emmett Ng]
 title: [About 53 other things]
 subtitle: [Emmett Ng]
 description: [Good afternoon  Good evening & Good night]
-markdown: maruku
+markdown: kramdown 
 use_math: true

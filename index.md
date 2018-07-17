@@ -1,5 +1,6 @@
 ---
 title: Emmett Ng
+mathjax: true
 ---
 
 ## [Computational Intelligence](intelligence/intelligence.md)

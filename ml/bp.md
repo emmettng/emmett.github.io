@@ -1,14 +1,12 @@
 --------------
+0.If you find some error in following content I will be really appreciate if you could start an issue or notfiy me by what every means.    
+1.This doc is from rewriting of all my notes in google docs for reminding myself for future reference, so it will be updated when necessary.  
+2.By the time I need this doc, it is highly likely that the only thing I could remember is that I use to know what being recorded here very well. Therefore:  
+  - Notation will be as simple as possible.
+  - Equation will be as easy understanding as possible.    
 
-This doc is from rewriting of all my notes in google docs for reminding myself for future reference, so it will be updated when necessary.
-
-By the time I need this doc, it is highly likely that the only thing I could remember is that I use to know what being recorded here very well. Therefore:
-
-notation will be as simple as possible.
-
-equation will be as easy understanding as possible.
-
-All recorded below is my personal understanding and has not been reviewed by many other expert seriously.
+3.All recorded below is my personal understanding and has not been reviewed by many other expert seriously.  
+4.If you would like to use any graph or equation below, please help yourself and being mentioned somewhere in your work would be great also.    
 
 --------------
 # BP algorithm
@@ -49,7 +47,7 @@ Belief propagation is ... ok something else.
       $x^T|W$ is my notation for remembering the result of this derivatives.
       it means transpose $x$ and replicate the value of each dimension so $X^T|W$ will be a matrix that has the same shape as W.
       ![trans_extend](../imgs/trans_extend.png)
-      The image above show $x^T|W$ in a normal case, if $W$ is simplified as a vector, then $x^T|W$ will just be $X^T$.
+      The image above show $x^T|W$ in a normal case, if $W$ is simlified as a vector, then $x^T|W$ will just be $X^T$.
 
       The Transpose operation is necessary so .....
 - Notations
@@ -57,7 +55,7 @@ Belief propagation is ... ok something else.
   - $a = a(x|W)$ , then $a^\prime=\frac{dt}{dx}$
     - I use 'at' instead of 'y', and use the notation ' $|$ ' instead of ' $;$ ', to remind myself that $W$ as the only trainable parameter of the model ($b$ is another actually), after training, it encoded the background knowledge of the context in which we collected our training samples.
   - $f = f(a_i),a_i \in at$, then $f^\prime=\frac{df}{da}$   
-    f could be any differentiable function, and it is an element-wise operation on `a`.
+    f could be any differentiable function, and it is an elementwise operation on `a`.
   - $l=l(f,t)$, then $l^\prime=\frac{dl}{df}$   
     $l$ is the loss function, a metric which give an scale value to represent difference between $l$ and $t$, $t$ is the target value, in supervised learning $t$ will be labels, either categorical label or real value for regression problem. In unsupervised learning, $t$ could be $x$ or some other value.
 
@@ -65,7 +63,7 @@ Belief propagation is ... ok something else.
 
   basically a single layer one dimensional output fully connected neuron network would be like the simplified W in the image above, in this case $y = f(a) = f(a(x|W))$
 
-- I will use **row vector**, so it would keep consistent with tensorflow and other real world utilities.
+- I will use **row vector**, so it would keep consistent with tensorflow and other real world utilies.
 ### Start from the final layer.
   - what we want : $\frac{dl}{dW}$
   - Chain rule:
@@ -96,7 +94,7 @@ if the input is $x_1$ and t is $y_1$, we know:
 
 - $\frac{dl}{dW} = l^\prime_{f_1} * f^\prime_{a_1} * X^T$
 
-This is pretty  straightforward, we want `change W to affect l` ($\frac{dl}{dW}$), and it has three composition:
+This is pretty stright forward, we want `change W to affect l` ($\frac{dl}{dW}$), and it has three composition:
 
 - affine transformation part:
   - $a = a(x|W)$
@@ -116,14 +114,14 @@ A little bit complicated:
 
 - $X^T|W$ would be a replicate of $x$ like in image above and have shape as W.
 - $l^\prime$ is a vector whose components are partial derivatives.
-- $f^\prime$ is element-wise derivatives.
-- $l^\prime$ and $f^\prime$ are vectors of the same size and they should multiply element-wise. Just like dealing with two separate single layer one ouput network.
-- The notation $\bigodot$ means multiply element-wise, and it works for 1d as well.
+- $f^\prime$ is elementwise derivatives.
+- $l^\prime$ and $f^\prime$ are vectors of the same size and they should multiply elementwise. Just like dealing with two seperate single layer one ouput network.
+- The notation $\bigodot$ means multiply elementwise, and it works for 1d as well.
 
 > It is clearly that the change of $W_1$ and $W_2$ will depends on $l^\prime_1 \times f^\prime_1$ and $l^\prime_2 \times f^\prime_2$ respectively.
 >- In other words, it relies on $l^\prime \bigodot f^\prime$.
->- $a^\prime=X^T|W$ provide the base to the following change, it is the input $x$ and it is the same to all output neuron.
->- since $l^\prime \bigodot f^\prime = \frac{dl}{da}$ and according to Eq.2: $\frac{dl}{dW} = \frac{dl}{da}x^T|W$, we notate $\frac{dl}{da}$ as $\delta$. Thus, $\delta$ of each layer determines how much the weight should adjust for a better loss. It is clearly that:
+>- $a^\prime=X^T|W$ provide the base to the following change,it is the input $x$ and it is the same to all output neuron.
+>- since $l^\prime \bigodot f^\prime = \frac{dl}{da}$ and according to Eq.2: $\frac{dl}{dW} = \frac{dl}{da}x^T|W$, we notate $\frac{dl}{da}$ as $\delta$. Thus, $\delta$ of each layer detemines how much the weight should adjust for a better loss. It is clearly that:
 >   - $\delta$ is a vector of the same dimension as the output of that layer.
 >   - a 0 element in vector $\delta$ means there is nothing to do to improve the loss at a certain output dimension.
 
@@ -140,7 +138,7 @@ A little bit complicated:
 **With more layers comes more notation.**
 > One more, Just One more notation `N` label of layer `N`.
 
-First of all, rewrite notations in previous examples, so the meaning of newly introduced symbol `'N'` could be clarified:
+First of all, rewirte notations in previous examples, so the meaning of newly introduced symbol `'N'` could be clearified:
 
 >0.
 > - $I_N = f_{N-1}$
@@ -161,7 +159,7 @@ Use `I` to represent input of a certain layer.
 > - $f_N = f(a_N)$
 > - $f^\prime_N=f^\prime(a_N)$
 
-- element-wise function $f$, usually activation function. This produce a vetor with `output shape` of layer `N`
+- elementwise function $f$, usually activation function. This produce a vetor with `output shape` of layer `N`
 >3.
 > - $l=l(f_N)$
 > - $l^\prime = l^\prime(f_N)$
@@ -173,7 +171,7 @@ Use `I` to represent input of a certain layer.
 >- $l^\prime \bigodot f^\prime_N=\delta^n$ **(The `l` is just about final alyer)**
 
 - $a^\prime_N$ is basically input of layer `N` replicated to shape of weight of layer `N` $\rightarrow$ $I^T_N|W_N$.
-- change of weight on layer `N` ($\hat{W}_N$) will be written as the form of `loss of layer N`(layer output size vector) $\bigotimes$ `the base of change on layer N` : $\hat{W}_N = \delta^N \bigotimes I^T_N|W_N$
+- change of weight on layer `N` ($\hat{W}_N$) will be writen as the form of `loss of layer N`(layer output size vector) $\bigotimes$ `the base of change on layer N` : $\hat{W}_N = \delta^N \bigotimes I^T_N|W_N$
 
 **The above equation hold for every layer!!!**  
 yes this one below:  
@@ -209,7 +207,7 @@ explain from 1 to 8, if I cannot remember what this mean smoothly maybe two week
 > - such a natural thing
 > - $\delta^N$ with size of out of $W_N$, $f^\prime_N-1$ with size of input of $W_N$.
 > - The role of $W$ is affine transformation which would either shrink or amplify the information , such as in  [conv & trans-conv](./Convolution.md)
-> - I just need the above part. Why rewrite the BP all over again?....
+> - I just need the above part. Why rewirte the BP all over again?....
 
 **The above equation `(9)` is valid for all hidden layers**
 
@@ -218,7 +216,7 @@ explain from 1 to 8, if I cannot remember what this mean smoothly maybe two week
 - $\delta^N \rightarrow \delta^{N-1}$    : line `(9)` back propagate
 - $\delta^N \rightarrow I^T_N|W_N \rightarrow \hat{W_N}$  :line `(8)` compute change of $W_N$
 
-These three mapping are what **back propagation** all about.
+These three maping are what **back propagation** all about.
 
 In human language it means:    
 How to modify / change / update `WEIGHT` on each `LAYER` depends on:
@@ -229,9 +227,8 @@ REMEMBER this useless expression.
 
 #### convergence
 - one layer : easy
-- multi layer : change $W$ separately which lead to different hidden layer input that previous loop, batch might the trend but, for a mnist example in yya, actually it also works on non-shuffled dataset. Someone says there is no solid proof yet.
+- multi layer : change $W$ seperately which lead to different hidden layer input thatn previous loop, batch might summarize the trend but, for a mnist exmaple in yya, actually it also works on nonshuffled dataset. Someone says there is no solid proof yet.
 --------------------------------------------------------------------
-
 
 
 
