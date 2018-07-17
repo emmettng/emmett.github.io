@@ -9,16 +9,16 @@ mathjax: true
 
 ## [Computational Intelligence](intelligence/intelligence.md)
 
- - monomorphism $$\rightarrow$$ information preserve, and it obeys the following constrain:
+ - monomorphism --> information preserve, and it obeys the following constrain:
 
- - local vs global $\rightarrow$ sparsity
+ - local vs global --> sparsity
 
- - learning principle $\rightarrow$ variance reduction
+ - learning principle --> variance reduction
 
- - Yes You Are! $\rightarrow$ YYA network, the demo of computational principles of learning ability.
+ - Yes You Are! -->  YYA network, the demo of computational principles of learning ability.
 
 ## [Machine Learning](ml/ml.md)
 
   - [Back Propagation](ml/bp.md.html)
 
-  - [Convolution]
+  - [Convolution](ml/Convolution.md)
