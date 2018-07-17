@@ -3,29 +3,41 @@
   <head>
       <meta charset="utf-8" />
       <title>Convolution</title>
-      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); overflow: auto; }
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX","output/HTML-CSS"],
+    extensions: [],
+    TeX: {
+      extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+    },
+    showMathMenu: false
+  });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js">
+</script>
+      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(29, 31, 33); background-color: rgb(255, 255, 255); overflow: auto; }
 .markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
-.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(0, 0, 0); }
 .markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
 .markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
 .markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
 .markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
 .markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
 .markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
-.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) del { color: rgb(124, 135, 156); }
-.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(82, 139, 255); }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(67, 72, 76); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(29, 31, 33); }
 .markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
 .markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
 .markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
-.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(124, 135, 156); border-color: rgb(75, 83, 98); border-width: 4px; }
-.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(75, 83, 98); background: none; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(67, 72, 76); border-color: rgb(214, 214, 214); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(214, 214, 214); background: none; }
 .markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
-.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(75, 83, 98); }
-.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
-.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
-.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(75, 83, 98) rgb(75, 83, 98) rgb(62, 68, 81); border-image: initial; background-color: rgb(58, 63, 75); }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(214, 214, 214); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(0, 0, 0); background-color: rgb(240, 240, 240); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(245, 245, 245); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(0, 0, 0); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(214, 214, 214) rgb(214, 214, 214) rgb(199, 199, 199); border-image: initial; background-color: rgb(240, 240, 240); }
 .markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); overflow: scroll; }
 .markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
 .markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
@@ -101,29 +113,29 @@
 .scrollbars-visible-always .markdown-preview pre.editor-colors .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors .horizontal-scrollbar { visibility: hidden; }
 .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .horizontal-scrollbar { visibility: visible; }
 .markdown-preview .task-list-item-checkbox { position: absolute; margin: 0.25em 0px 0px -1.4em; }
-.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); overflow: auto; }
+.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(29, 31, 33); background-color: rgb(255, 255, 255); overflow: auto; }
 .markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
-.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(0, 0, 0); }
 .markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
 .markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
 .markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
 .markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
 .markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
 .markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
-.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) del { color: rgb(124, 135, 156); }
-.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(82, 139, 255); }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(67, 72, 76); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(29, 31, 33); }
 .markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
 .markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
 .markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
-.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(124, 135, 156); border-color: rgb(75, 83, 98); border-width: 4px; }
-.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(75, 83, 98); background: none; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(67, 72, 76); border-color: rgb(214, 214, 214); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(214, 214, 214); background: none; }
 .markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
-.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(75, 83, 98); }
-.markdown-preview:not([data-use-github-style]) pre, .markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
-.markdown-preview:not([data-use-github-style]) pre, .markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
-.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(75, 83, 98) rgb(75, 83, 98) rgb(62, 68, 81); border-image: initial; background-color: rgb(58, 63, 75); }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(214, 214, 214); }
+.markdown-preview:not([data-use-github-style]) pre, .markdown-preview:not([data-use-github-style]) code { color: rgb(0, 0, 0); background-color: rgb(240, 240, 240); }
+.markdown-preview:not([data-use-github-style]) pre, .markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(245, 245, 245); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(0, 0, 0); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(214, 214, 214) rgb(214, 214, 214) rgb(199, 199, 199); border-image: initial; background-color: rgb(240, 240, 240); }
 .markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); overflow: scroll; }
 .markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
 .markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
@@ -219,418 +231,257 @@
 }
 
 pre.editor-colors {
-  background-color: #282c34;
-  color: #abb2bf;
-}
-pre.editor-colors .line.cursor-line {
-  background-color: rgba(153, 187, 255, 0.04);
-}
-pre.editor-colors .invisible {
-  color: #abb2bf;
-}
-pre.editor-colors .cursor {
-  border-left: 2px solid #528bff;
-}
-pre.editor-colors .selection .region {
-  background-color: #3e4451;
-}
-pre.editor-colors .bracket-matcher .region {
-  border-bottom: 1px solid #528bff;
-  box-sizing: border-box;
-}
-pre.editor-colors .invisible-character {
-  color: rgba(171, 178, 191, 0.15);
-}
-pre.editor-colors .indent-guide {
-  color: rgba(171, 178, 191, 0.15);
+  background-color: #ffffff;
+  color: #1d1f21;
 }
 pre.editor-colors .wrap-guide {
-  background-color: rgba(171, 178, 191, 0.15);
+  background-color: #c5c8c6;
 }
-pre.editor-colors .find-result .region.region.region,
-pre.editor-colors .current-result .region.region.region {
-  border-radius: 2px;
-  background-color: rgba(82, 139, 255, 0.24);
-  transition: border-color 0.4s;
+pre.editor-colors .indent-guide {
+  color: #c5c8c6;
 }
-pre.editor-colors .find-result .region.region.region {
-  border: 2px solid transparent;
+pre.editor-colors .invisible-character {
+  color: #c5c8c6;
 }
-pre.editor-colors .current-result .region.region.region {
-  border: 2px solid #528bff;
-  transition-duration: .1s;
+pre.editor-colors .gutter {
+  background-color: #ffffff;
+  color: #b4b7b4;
 }
 pre.editor-colors .gutter .line-number {
-  color: #636d83;
+  padding: 0 0.25em 0 0.5em;
   -webkit-font-smoothing: antialiased;
 }
 pre.editor-colors .gutter .line-number.cursor-line {
-  color: #abb2bf;
-  background-color: #2c313a;
+  background-color: #e0e0e0;
+  color: #373b41;
 }
 pre.editor-colors .gutter .line-number.cursor-line-no-selection {
-  background-color: transparent;
-}
-pre.editor-colors .gutter .line-number .icon-right {
-  color: #abb2bf;
-}
-pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
-  bottom: -3px;
-}
-pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
-  content: "";
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 25px;
-  border-bottom: 1px dotted rgba(224, 82, 82, 0.5);
-  pointer-events: none;
+  color: #373b41;
 }
 pre.editor-colors .gutter .line-number.folded,
 pre.editor-colors .gutter .line-number:after,
 pre.editor-colors .fold-marker:after {
-  color: #abb2bf;
+  color: #b4b7b4;
+}
+pre.editor-colors .invisible {
+  color: #1d1f21;
+}
+pre.editor-colors .cursor {
+  color: #1d1f21;
+}
+pre.editor-colors .selection .region {
+  background-color: #e0e0e0;
+}
+pre.editor-colors .bracket-matcher .region {
+  border-color: #b4b7b4;
 }
 .syntax--comment {
-  color: #5c6370;
-  font-style: italic;
+  color: #969896;
 }
 .syntax--comment .syntax--markup.syntax--link {
-  color: #5c6370;
+  color: #969896;
 }
 .syntax--entity.syntax--name.syntax--type {
-  color: #e5c07b;
+  color: #f0c674;
 }
 .syntax--entity.syntax--other.syntax--inherited-class {
-  color: #98c379;
+  color: #b5bd68;
 }
 .syntax--keyword {
-  color: #c678dd;
+  color: #b294bb;
 }
 .syntax--keyword.syntax--control {
-  color: #c678dd;
+  color: #b294bb;
 }
 .syntax--keyword.syntax--operator {
-  color: #abb2bf;
+  color: #1d1f21;
 }
 .syntax--keyword.syntax--other.syntax--special-method {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--keyword.syntax--other.syntax--unit {
-  color: #d19a66;
+  color: #de935f;
 }
 .syntax--storage {
-  color: #c678dd;
-}
-.syntax--storage.syntax--type.syntax--annotation,
-.syntax--storage.syntax--type.syntax--primitive {
-  color: #c678dd;
-}
-.syntax--storage.syntax--modifier.syntax--package,
-.syntax--storage.syntax--modifier.syntax--import {
-  color: #abb2bf;
+  color: #b294bb;
 }
 .syntax--constant {
-  color: #d19a66;
-}
-.syntax--constant.syntax--variable {
-  color: #d19a66;
+  color: #de935f;
 }
 .syntax--constant.syntax--character.syntax--escape {
-  color: #56b6c2;
+  color: #8abeb7;
 }
 .syntax--constant.syntax--numeric {
-  color: #d19a66;
+  color: #de935f;
 }
 .syntax--constant.syntax--other.syntax--color {
-  color: #56b6c2;
+  color: #8abeb7;
 }
 .syntax--constant.syntax--other.syntax--symbol {
-  color: #56b6c2;
+  color: #b5bd68;
 }
 .syntax--variable {
-  color: #e06c75;
+  color: #cc6666;
 }
 .syntax--variable.syntax--interpolation {
-  color: #be5046;
+  color: #a3685a;
 }
-.syntax--variable.syntax--parameter {
-  color: #abb2bf;
+.syntax--variable.syntax--parameter.syntax--function {
+  color: #1d1f21;
+}
+.syntax--invalid.syntax--illegal {
+  background-color: #cc6666;
+  color: #ffffff;
 }
 .syntax--string {
-  color: #98c379;
+  color: #b5bd68;
 }
 .syntax--string.syntax--regexp {
-  color: #56b6c2;
+  color: #8abeb7;
 }
 .syntax--string.syntax--regexp .syntax--source.syntax--ruby.syntax--embedded {
-  color: #e5c07b;
+  color: #f0c674;
 }
 .syntax--string.syntax--other.syntax--link {
-  color: #e06c75;
+  color: #cc6666;
 }
-.syntax--punctuation.syntax--definition.syntax--comment {
-  color: #5c6370;
-}
-.syntax--punctuation.syntax--definition.syntax--method-parameters,
-.syntax--punctuation.syntax--definition.syntax--function-parameters,
 .syntax--punctuation.syntax--definition.syntax--parameters,
-.syntax--punctuation.syntax--definition.syntax--separator,
-.syntax--punctuation.syntax--definition.syntax--seperator,
 .syntax--punctuation.syntax--definition.syntax--array {
-  color: #abb2bf;
+  color: #1d1f21;
 }
 .syntax--punctuation.syntax--definition.syntax--heading,
 .syntax--punctuation.syntax--definition.syntax--identity {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--punctuation.syntax--definition.syntax--bold {
-  color: #e5c07b;
+  color: #f0c674;
   font-weight: bold;
 }
 .syntax--punctuation.syntax--definition.syntax--italic {
-  color: #c678dd;
+  color: #b294bb;
   font-style: italic;
 }
 .syntax--punctuation.syntax--section.syntax--embedded {
-  color: #be5046;
+  color: #a3685a;
 }
 .syntax--punctuation.syntax--section.syntax--method,
 .syntax--punctuation.syntax--section.syntax--class,
 .syntax--punctuation.syntax--section.syntax--inner-class {
-  color: #abb2bf;
+  color: #1d1f21;
 }
 .syntax--support.syntax--class {
-  color: #e5c07b;
-}
-.syntax--support.syntax--type {
-  color: #56b6c2;
+  color: #f0c674;
 }
 .syntax--support.syntax--function {
-  color: #56b6c2;
+  color: #8abeb7;
 }
 .syntax--support.syntax--function.syntax--any-method {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--entity.syntax--name.syntax--function {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--entity.syntax--name.syntax--class,
 .syntax--entity.syntax--name.syntax--type.syntax--class {
-  color: #e5c07b;
+  color: #f0c674;
 }
 .syntax--entity.syntax--name.syntax--section {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--entity.syntax--name.syntax--tag {
-  color: #e06c75;
+  color: #cc6666;
 }
 .syntax--entity.syntax--other.syntax--attribute-name {
-  color: #d19a66;
+  color: #de935f;
 }
 .syntax--entity.syntax--other.syntax--attribute-name.syntax--id {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--meta.syntax--class {
-  color: #e5c07b;
+  color: #f0c674;
 }
 .syntax--meta.syntax--class.syntax--body {
-  color: #abb2bf;
+  color: #1d1f21;
+}
+.syntax--meta.syntax--link {
+  color: #de935f;
 }
 .syntax--meta.syntax--method-call,
 .syntax--meta.syntax--method {
-  color: #abb2bf;
-}
-.syntax--meta.syntax--definition.syntax--variable {
-  color: #e06c75;
-}
-.syntax--meta.syntax--link {
-  color: #d19a66;
+  color: #1d1f21;
 }
 .syntax--meta.syntax--require {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--meta.syntax--selector {
-  color: #c678dd;
+  color: #b294bb;
 }
 .syntax--meta.syntax--separator {
-  color: #abb2bf;
+  background-color: #373b41;
+  color: #1d1f21;
 }
 .syntax--meta.syntax--tag {
-  color: #abb2bf;
-}
-.syntax--underline {
-  text-decoration: underline;
+  color: #1d1f21;
 }
 .syntax--none {
-  color: #abb2bf;
-}
-.syntax--invalid.syntax--deprecated {
-  color: #523d14 !important;
-  background-color: #e0c285 !important;
-}
-.syntax--invalid.syntax--illegal {
-  color: white !important;
-  background-color: #e05252 !important;
+  color: #1d1f21;
 }
 .syntax--markup.syntax--bold {
-  color: #d19a66;
+  color: #de935f;
   font-weight: bold;
 }
 .syntax--markup.syntax--changed {
-  color: #c678dd;
+  color: #b294bb;
 }
 .syntax--markup.syntax--deleted {
-  color: #e06c75;
+  color: #cc6666;
 }
 .syntax--markup.syntax--italic {
-  color: #c678dd;
+  color: #b294bb;
   font-style: italic;
 }
 .syntax--markup.syntax--heading {
-  color: #e06c75;
+  color: #cc6666;
 }
 .syntax--markup.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
-  color: #61afef;
+  color: #81a2be;
 }
 .syntax--markup.syntax--link {
-  color: #56b6c2;
+  color: #81a2be;
 }
 .syntax--markup.syntax--inserted {
-  color: #98c379;
+  color: #b5bd68;
 }
 .syntax--markup.syntax--quote {
-  color: #d19a66;
+  color: #de935f;
 }
 .syntax--markup.syntax--raw {
-  color: #98c379;
-}
-.syntax--source.syntax--c .syntax--keyword.syntax--operator {
-  color: #c678dd;
-}
-.syntax--source.syntax--cpp .syntax--keyword.syntax--operator {
-  color: #c678dd;
-}
-.syntax--source.syntax--cs .syntax--keyword.syntax--operator {
-  color: #c678dd;
-}
-.syntax--source.syntax--css .syntax--property-name,
-.syntax--source.syntax--css .syntax--property-value {
-  color: #828997;
-}
-.syntax--source.syntax--css .syntax--property-name.syntax--support,
-.syntax--source.syntax--css .syntax--property-value.syntax--support {
-  color: #abb2bf;
-}
-.syntax--source.syntax--elixir .syntax--source.syntax--embedded.syntax--source {
-  color: #abb2bf;
-}
-.syntax--source.syntax--elixir .syntax--constant.syntax--language,
-.syntax--source.syntax--elixir .syntax--constant.syntax--numeric,
-.syntax--source.syntax--elixir .syntax--constant.syntax--definition {
-  color: #61afef;
-}
-.syntax--source.syntax--elixir .syntax--variable.syntax--definition,
-.syntax--source.syntax--elixir .syntax--variable.syntax--anonymous {
-  color: #c678dd;
-}
-.syntax--source.syntax--elixir .syntax--parameter.syntax--variable.syntax--function {
-  color: #d19a66;
-  font-style: italic;
-}
-.syntax--source.syntax--elixir .syntax--quoted {
-  color: #98c379;
-}
-.syntax--source.syntax--elixir .syntax--keyword.syntax--special-method,
-.syntax--source.syntax--elixir .syntax--embedded.syntax--section,
-.syntax--source.syntax--elixir .syntax--embedded.syntax--source.syntax--empty {
-  color: #e06c75;
-}
-.syntax--source.syntax--elixir .syntax--readwrite.syntax--module .syntax--punctuation {
-  color: #e06c75;
-}
-.syntax--source.syntax--elixir .syntax--regexp.syntax--section,
-.syntax--source.syntax--elixir .syntax--regexp.syntax--string {
-  color: #be5046;
-}
-.syntax--source.syntax--elixir .syntax--separator,
-.syntax--source.syntax--elixir .syntax--keyword.syntax--operator {
-  color: #d19a66;
-}
-.syntax--source.syntax--elixir .syntax--variable.syntax--constant {
-  color: #e5c07b;
-}
-.syntax--source.syntax--elixir .syntax--array,
-.syntax--source.syntax--elixir .syntax--scope,
-.syntax--source.syntax--elixir .syntax--section {
-  color: #828997;
+  color: #b5bd68;
 }
 .syntax--source.syntax--gfm .syntax--markup {
   -webkit-font-smoothing: auto;
 }
 .syntax--source.syntax--gfm .syntax--link .syntax--entity {
-  color: #61afef;
+  color: #8abeb7;
 }
-.syntax--source.syntax--go .syntax--storage.syntax--type.syntax--string {
-  color: #c678dd;
-}
-.syntax--source.syntax--ini .syntax--keyword.syntax--other.syntax--definition.syntax--ini {
-  color: #e06c75;
-}
-.syntax--source.syntax--java .syntax--storage.syntax--modifier.syntax--import {
-  color: #e5c07b;
-}
-.syntax--source.syntax--java .syntax--storage.syntax--type {
-  color: #e5c07b;
-}
-.syntax--source.syntax--java .syntax--keyword.syntax--operator.syntax--instanceof {
-  color: #c678dd;
-}
-.syntax--source.syntax--java-properties .syntax--meta.syntax--key-pair {
-  color: #e06c75;
-}
-.syntax--source.syntax--java-properties .syntax--meta.syntax--key-pair > .syntax--punctuation {
-  color: #abb2bf;
-}
-.syntax--source.syntax--js .syntax--keyword.syntax--operator {
-  color: #56b6c2;
-}
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--delete,
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--in,
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--of,
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--instanceof,
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--new,
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--typeof,
-.syntax--source.syntax--js .syntax--keyword.syntax--operator.syntax--void {
-  color: #c678dd;
+.syntax--source.syntax--cs .syntax--keyword.syntax--operator {
+  color: #b294bb;
 }
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--string.syntax--quoted.syntax--json {
-  color: #e06c75;
+  color: #cc6666;
 }
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation.syntax--string {
-  color: #e06c75;
+  color: #cc6666;
 }
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json,
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json,
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation,
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--value.syntax--json > .syntax--string.syntax--quoted.syntax--json > .syntax--punctuation {
-  color: #98c379;
+  color: #b5bd68;
 }
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--dictionary.syntax--json > .syntax--constant.syntax--language.syntax--json,
 .syntax--source.syntax--json .syntax--meta.syntax--structure.syntax--array.syntax--json > .syntax--constant.syntax--language.syntax--json {
-  color: #56b6c2;
-}
-.syntax--source.syntax--ruby .syntax--constant.syntax--other.syntax--symbol > .syntax--punctuation {
-  color: inherit;
-}
-.syntax--source.syntax--php .syntax--class.syntax--bracket {
-  color: #abb2bf;
-}
-.syntax--source.syntax--python .syntax--keyword.syntax--operator.syntax--logical.syntax--python {
-  color: #c678dd;
-}
-.syntax--source.syntax--python .syntax--variable.syntax--parameter {
-  color: #d19a66;
+  color: #8abeb7;
 }
 </style>
   </head>
@@ -685,26 +536,26 @@ pre.editor-colors .fold-marker:after {
 <p>I will use <strong>Elementary Feature</strong> and <strong>Higher Level Feature</strong> instead of <strong>Simplicity</strong> and <strong>Complexity</strong> in the following discussion. Generally speaking, ‘Feature Level’ is a relative concept. Such as the VGG 16 feature map .</p>
 <h2>The binding problem</h2>
 <p>Firstly, I will give a intuitive discussion about a problem of the Fully Connected network (usually being referred as FC network).</p>
-<p>Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron $\alpha_1$  is the only representation of a vertical bar in the input layer <code style="font-family: &quot;courier new&quot;;">I</code> and neuron $\alpha_2$ is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuron other than $\alpha_1$ will be activated, so the same as $\alpha_2$ to a horizontal bar.</p>
-<p><img src="../imgs/binding_1.png?v=1531809603751" alt="binding_1"></p>
+<p>Assuming that we have somehow trained this network successfully, so that in layer N of this network, there are invariant representations of all elementary features, and when being activated, neuron <span class="math"><script type="math/tex">\alpha_1</script></span>  is the only representation of a vertical bar in the input layer <code style="font-family: &quot;courier new&quot;;">I</code> and neuron <span class="math"><script type="math/tex">\alpha_2</script></span> is the only representation of a horizontal bar in the input layer I.  In other words, if there is any vertical bar shows up in the input layer, no neuron other than <span class="math"><script type="math/tex">\alpha_1</script></span> will be activated, so the same as <span class="math"><script type="math/tex">\alpha_2</script></span> to a horizontal bar.</p>
+<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_1.png?v=1531811164772" alt="binding_1"></p>
 <blockquote>
 <p>Thanks for Dr Simon Stringer’s <a href="https://www.youtube.com/watch?v=j4kjGso_Ze0&amp;t=183s">talk</a> and the example of letters <code style="font-family: &quot;courier new&quot;;">'T'</code> and <code style="font-family: &quot;courier new&quot;;">'L'</code>.</p>
 </blockquote>
-<p>If our input image contains only one English letter, then it is possible that ,in layer <code style="font-family: &quot;courier new&quot;;">N+</code>, there is a neuron $\beta_1$ which is the only representation of a letter <code style="font-family: &quot;courier new&quot;;">‘T’</code> and its activation status depends on both $\alpha_1$ and $\alpha_2$.</p>
-<p>Now the question is : In layer <code style="font-family: &quot;courier new&quot;;">N+</code>, could there be another neuron $\beta_2$ whose activation status depends on neurons $\alpha_1$ and $\alpha_2$ and it is the only representation of letter <code style="font-family: &quot;courier new&quot;;">‘L’</code> in input layer I.</p>
-<p>It is apparently that the representation of letter ‘L’ cannot depends on the combination of $\alpha_1$ and $\alpha_2$ , otherwise it will bring ambiguity.</p>
-<p>The simplest solution is to have one more neuron that represent either vertical bar or horizontal bar.  Such as in figure below. In this case, neuron $\alpha_2$ and $\alpha_3$ both represent horizontal bar, furthermore they also carry composition information that indicate the role of horizontal bar in different context (<code style="font-family: &quot;courier new&quot;;">'L'</code> or <code style="font-family: &quot;courier new&quot;;">'T'</code>) respectively.</p>
-<p><img src="../imgs/binding_2.png?v=1531809603751" alt="binding_2"></p>
+<p>If our input image contains only one English letter, then it is possible that ,in layer <code style="font-family: &quot;courier new&quot;;">N+</code>, there is a neuron <span class="math"><script type="math/tex">\beta_1</script></span> which is the only representation of a letter <code style="font-family: &quot;courier new&quot;;">‘T’</code> and its activation status depends on both <span class="math"><script type="math/tex">\alpha_1</script></span> and <span class="math"><script type="math/tex">\alpha_2</script></span>.</p>
+<p>Now the question is : In layer <code style="font-family: &quot;courier new&quot;;">N+</code>, could there be another neuron <span class="math"><script type="math/tex">\beta_2</script></span> whose activation status depends on neurons <span class="math"><script type="math/tex">\alpha_1</script></span> and <span class="math"><script type="math/tex">\alpha_2</script></span> and it is the only representation of letter <code style="font-family: &quot;courier new&quot;;">‘L’</code> in input layer I.</p>
+<p>It is apparently that the representation of letter ‘L’ cannot depends on the combination of <span class="math"><script type="math/tex">\alpha_1</script></span> and <span class="math"><script type="math/tex">\alpha_2</script></span> , otherwise it will bring ambiguity.</p>
+<p>The simplest solution is to have one more neuron that represent either vertical bar or horizontal bar.  Such as in figure below. In this case, neuron <span class="math"><script type="math/tex">\alpha_2</script></span> and <span class="math"><script type="math/tex">\alpha_3</script></span> both represent horizontal bar, furthermore they also carry composition information that indicate the role of horizontal bar in different context (<code style="font-family: &quot;courier new&quot;;">'L'</code> or <code style="font-family: &quot;courier new&quot;;">'T'</code>) respectively.</p>
+<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_2.png?v=1531811164772" alt="binding_2"></p>
 <p>Of course, it it a common sense that different objects (higher level feature) have different parts, but as the feature level goes higher and higher, more and more basic elementary features will take part in the composition of more and more higher level features. For instance, as shown in figure below, the composition information seems to be not necessary. Because the Optimus Prime has a <a href="https://tfwiki.net/wiki/Barrage_cannon">Barrage cannon</a> while a truck does not. In addition, a truck carries a cargo, while the Optimus Prime does not. However, it is highly likely that the barrage cannon and the trailer share a lot elementary features. Thus, introducing composition information will be inevitable in a deep architecture.</p>
-<p><img src="../imgs/binding_3.jpg?v=1531809603751" alt="binding_3"></p>
+<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_3.jpg?v=1531811164772" alt="binding_3"></p>
 <p>Now we know, in a fully connected neuron network, duplicated representations of same elementary features are necessary for expressing composition information (context information). But how much trouble it would bring into the network?</p>
-<p><img src="../imgs/binding_combinatorial_1.png?v=1531809603751" alt="combinatorial explosion">
+<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_combinatorial_1.png?v=1531811164772" alt="combinatorial explosion">
 Intuitively, the matrix above shows relation between higher level features in a certain layer and elementary features one layer below.
-$O_1$ to $O_i$ are different features, $i$ is the index. If two features share exactly same set of elementary features, then there will be at least one replicated representation of an elementary features to provide extra composition information.</p>
-<p>For example, $O_1$ and $O_2$ are presented by same set of elementary features, then there will be one extra elementary feature that carrying composition information. $O_1$ and $O_3$ might depends on not exactly the same set of elementary features, then it is not necessary to have an extra replicated feature.</p>
-<p><img src="../imgs/binding_combinatorial_2.png?v=1531809603751" alt="combinatorial explosion 2">
-Assume, there is a new feature $O_{i+1}$ that need to be represented by neurons in this layer <code style="font-family: &quot;courier new&quot;;">M</code> and features $O_{i+1}$, $O_i$, $O_2$ are all composed with same set of features, therefore the minimum number of replicated features in previous layer after introducing $O_{i+1}$ is as shown in figure above.</p>
-<p>This is just the relation between two adjacent layers, the need for extra features will be augmented as the layer goes down. For example, feature $O_{i+1}$ is in layer <code style="font-family: &quot;courier new&quot;;">M</code>, the matrix indicates that we need at least two replicated representation in layer <code style="font-family: &quot;courier new&quot;;">M-1</code>, and each of these <code style="font-family: &quot;courier new&quot;;">M-1</code> features might need a certain number of replicated represent of their own in layer <code style="font-family: &quot;courier new&quot;;">M-2</code>.</p>
+<span class="math"><script type="math/tex">O_1</script></span> to <span class="math"><script type="math/tex">O_i</script></span> are different features, <span class="math"><script type="math/tex">i</script></span> is the index. If two features share exactly same set of elementary features, then there will be at least one replicated representation of an elementary features to provide extra composition information.</p>
+<p>For example, <span class="math"><script type="math/tex">O_1</script></span> and <span class="math"><script type="math/tex">O_2</script></span> are presented by same set of elementary features, then there will be one extra elementary feature that carrying composition information. <span class="math"><script type="math/tex">O_1</script></span> and <span class="math"><script type="math/tex">O_3</script></span> might depends on not exactly the same set of elementary features, then it is not necessary to have an extra replicated feature.</p>
+<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/binding_combinatorial_2.png?v=1531811164772" alt="combinatorial explosion 2">
+Assume, there is a new feature <span class="math"><script type="math/tex">O_{i+1}</script></span> that need to be represented by neurons in this layer <code style="font-family: &quot;courier new&quot;;">M</code> and features <span class="math"><script type="math/tex">O_{i+1}</script></span>, <span class="math"><script type="math/tex">O_i</script></span>, <span class="math"><script type="math/tex">O_2</script></span> are all composed with same set of features, therefore the minimum number of replicated features in previous layer after introducing <span class="math"><script type="math/tex">O_{i+1}</script></span> is as shown in figure above.</p>
+<p>This is just the relation between two adjacent layers, the need for extra features will be augmented as the layer goes down. For example, feature <span class="math"><script type="math/tex">O_{i+1}</script></span> is in layer <code style="font-family: &quot;courier new&quot;;">M</code>, the matrix indicates that we need at least two replicated representation in layer <code style="font-family: &quot;courier new&quot;;">M-1</code>, and each of these <code style="font-family: &quot;courier new&quot;;">M-1</code> features might need a certain number of replicated represent of their own in layer <code style="font-family: &quot;courier new&quot;;">M-2</code>.</p>
 <p>So, for a artificial neuron network with deep architecture:</p>
 <ul>
 <li>From top to bottom, The necessary replication of different features will increase dramatically.</li>
@@ -743,11 +594,11 @@ Assume, there is a new feature $O_{i+1}$ that need to be represented by neurons 
 </ul>
 <p>So, the total number of parameters in one convolutionary layer is</p>
 <blockquote>
-<p>$o * i * x * y$</p>
+<p><span class="math"><script type="math/tex">o * i * x * y</script></span></p>
 </blockquote>
-<p><img src="../imgs/conv_1.png?v=1531809603751" alt="conv_1"></p>
-<p><code style="font-family: &quot;courier new&quot;;">kernel</code> $k$ response for detecting <code style="font-family: &quot;courier new&quot;;">vertical bar</code> only. Therefore, the output of kernel $k$ actually contains not only the representation of vertical bar but also the position information of vertical bar.</p>
-<p>So <code style="font-family: &quot;courier new&quot;;">kernel</code> $k+1$ could response for detecting <code style="font-family: &quot;courier new&quot;;">horizontal bar</code> only. Therefore, <code style="font-family: &quot;courier new&quot;;">kernel</code> $K$ in this case is of the size <code style="font-family: &quot;courier new&quot;;">(1,2,x,y)</code>, 1 input channel and 2 output channels. And layer <code style="font-family: &quot;courier new&quot;;">N+</code> is capable of representing letter <code style="font-family: &quot;courier new&quot;;">T</code> and <code style="font-family: &quot;courier new&quot;;">L</code> at the same time.</p>
+<p><img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_1.png?v=1531811164772" alt="conv_1"></p>
+<p><code style="font-family: &quot;courier new&quot;;">kernel</code> <span class="math"><script type="math/tex">k</script></span> response for detecting <code style="font-family: &quot;courier new&quot;;">vertical bar</code> only. Therefore, the output of kernel <span class="math"><script type="math/tex">k</script></span> actually contains not only the representation of vertical bar but also the position information of vertical bar.</p>
+<p>So <code style="font-family: &quot;courier new&quot;;">kernel</code> <span class="math"><script type="math/tex">k+1</script></span> could response for detecting <code style="font-family: &quot;courier new&quot;;">horizontal bar</code> only. Therefore, <code style="font-family: &quot;courier new&quot;;">kernel</code> <span class="math"><script type="math/tex">K</script></span> in this case is of the size <code style="font-family: &quot;courier new&quot;;">(1,2,x,y)</code>, 1 input channel and 2 output channels. And layer <code style="font-family: &quot;courier new&quot;;">N+</code> is capable of representing letter <code style="font-family: &quot;courier new&quot;;">T</code> and <code style="font-family: &quot;courier new&quot;;">L</code> at the same time.</p>
 <p>Intuitively, the entire conv and pooling operation can be very well explained by example above.</p>
 <h2>Transpose convolution (deconvolution)</h2>
 <p>The following picture comes from two great tutorials about convolution and transpose convolution:</p>
@@ -756,18 +607,18 @@ Assume, there is a new feature $O_{i+1}$ that need to be represented by neurons 
 <p><a href="https://arxiv.org/pdf/1609.07009.pdf">Is the deconvolution layer the same as convolution layer</a></p>
 <ul>
 <li>convolution
-<img src="../imgs/conv_3.1.png?v=1531809603751" alt="conv_3.1"></li>
+<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_3.1.png?v=1531811164772" alt="conv_3.1"></li>
 <li>transpose convolution
-<img src="../imgs/conv_3.2.png?v=1531809603751" alt="conv_3.2"></li>
+<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_3.2.png?v=1531811164772" alt="conv_3.2"></li>
 </ul>
 </li>
 <li>
 <p><a href="https://towardsdatascience.com/up-sampling-with-transposed-convolution-9ae4f2df52d0">up-sampling with transpose convolution</a></p>
 <ul>
 <li>convolution
-<img src="../imgs/conv_2.1.png?v=1531809603751" alt="conv_2.1"></li>
+<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_2.1.png?v=1531811164772" alt="conv_2.1"></li>
 <li>transpose convolution
-<img src="../imgs/conv_2.2.png?v=1531809603751" alt="conv_2.2"></li>
+<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_2.2.png?v=1531811164773" alt="conv_2.2"></li>
 </ul>
 </li>
 </ul>
@@ -793,7 +644,7 @@ Even though , it detect possible elementary structure, it would be better if it 
 <ul>
 <li>the non-zeros value of each row vectors (above) are the same by order.</li>
 <li>Therefore, there is a unique maximum value in only one dimension which correspond to input vectors of certain direction.
-<img src="../imgs/conv_4.png?v=1531809603751" alt="conv_4"></li>
+<img src="/home/wh/workspace/open/emmettng.github.io/imgs/conv_4.png?v=1531811164773" alt="conv_4"></li>
 <li>Therefore, convolution layer equivalent to subjective mapping (epimorphism), which implies the knowledge of global information.</li>
 </ul>
 </li>
