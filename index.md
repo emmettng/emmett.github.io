@@ -21,12 +21,6 @@ mathjax: true
 
 Three keys:
 
- - monomorphism --> information preserve, and it obeys the following constrain:
-
- - local vs global --> layer structure, sparsity coding.
-
- - learning principle --> variance reduction
-
 TODO
 
 ## [Machine Learning](ml/ml.md)
